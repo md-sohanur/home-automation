@@ -6,7 +6,7 @@ from home_control.forms import RegistrationForm, LoginForm
 from home_control.models import  User
 from flask_login import login_user, current_user, logout_user, login_required
 
-switch = [0 , 0 , 0]
+switch = [0,0,0]
 flag = False
 
 @app.route("/")
@@ -22,19 +22,14 @@ def control():
     global switch
     switch_value = request.args.get('id') 
     switch[int(switch_value[0])] = int(switch_value[1])
-    global flag
-    flag = True
     return redirect(url_for('control_center'))
 
-@app.route("/sw_code")
-def sw_code():
-    global flag
-    if flag == True:
-        flag = False
-        return ','+str(switch[0])+str(switch[1])+str(switch[2])
-    else:
-        return str(int(flag))
-    
+@app.route("/check_sw")
+def check_sw():
+    global switch
+    return  str(switch)
+
+
 @app.route("/add_user", methods=['GET', 'POST'])
 @login_required
 def add_user():
