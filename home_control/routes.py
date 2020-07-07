@@ -6,7 +6,7 @@ from home_control.forms import RegistrationForm, LoginForm
 from home_control.models import  User
 from flask_login import login_user, current_user, logout_user, login_required
 
-switch = [0, 0 ,0]
+switch = [0 , 0 , 0]
 flag = False
 
 @app.route("/")
@@ -19,6 +19,7 @@ def control_center():
 
 @app.route("/control")
 def control():
+    global switch
     switch_value = request.args.get('id') 
     switch[int(switch_value[0])] = int(switch_value[1])
     global flag
