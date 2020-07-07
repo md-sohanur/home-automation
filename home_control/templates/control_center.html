@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+{% block control_center %}
+<style>      
+    th, td {
+    text-align: center;
+  }
+    button {
+        border-radius: 20px;
+        border: none; 
+        cursor: pointer; 
+        float: middle; 
+        color: white;
+    }
+    a:link {
+    text-decoration: none;
+    color: white;
+    
+    }
+
+    a:visited {
+    text-decoration: none;
+    color: white;
+    }
+
+    a:hover {
+    text-decoration: none;
+    color: white;
+    }
+
+    a:active {
+    text-decoration: none;
+    color: black;
+    
+    }
+</style>
+<div class="content-section">
+    <h2 style="text-align: left: ;">Room No - 1</h2>
+    <main role="main" class="container">
+        <div class="row">             
+            <div class="col-md-4">
+                <div class="content-section" >
+                    
+                        <table>
+                            <tr>{% if switch[0] == 1 %}
+                                <td><p><img  src="/static/web_pic/d_bulb_1.jpg" width="100" height="100"><br><p style="background-color: rgb(71, 155, 71); color: white;">Dream Light</p></p></td>
+                                <td style="width:80px"> </td>
+                                <td><form action="{{ url_for('control') }}" method="get">
+                                    <button name="id" type="submit" value="00"><img  src="/static/web_pic/on-1.png" width="100" height="38"></button>
+                                    </form>
+                                </td>
+                            {% else %}
+                                <td><p><img  src="/static/web_pic/d_bulb_0.jpg" width="100" height="100"><br><p style="background-color: rgb(70, 70, 70); color: white;">Dream Light</p></p></td>
+                                <td style="width:80px"> </td>
+                                <td><form action="{{ url_for('control') }}" method="get">
+                                    <button name="id" type="submit" value="01"><img  src="/static/web_pic/off-2.png" width="100" height="38"></button>
+                                    </form>
+                                </td>
+                            {% endif %} 
+                            </tr>
+                        </table>
+                    
+                </div>
+            </div>
+         
+            
+            <div class="col-md-4">
+                <div class="content-section" >
+                    
+                        <table>
+                            <tr>{% if switch[1] == 1 %}
+                                <td><p><img  src="/static/web_pic/bulb2-12.jpg" width="80" height="100"><p style="background-color: rgb(71, 155, 71); color: white;">Bulb</p></td>
+                                <td style="width:70px"> </td>
+                                <td><form action="{{ url_for('control') }}" method="get">
+                                    <button name="id" type="submit" value="10"><img  src="/static/web_pic/on-1.png" width="100" height="38"></button>
+                                    </form>
+                                </td>
+                            {% else %}
+                                <td><p><img  src="/static/web_pic/bulb2-s.jpg" width="80" height="100"><br><p style="background-color: rgb(70, 70, 70); color: white;">Bulb</p></p></td>
+                                <td style="width:80px"> </td>
+                                <td><form action="{{ url_for('control') }}" method="get">
+                                    <button name="id" type="submit" value="11"><img  src="/static/web_pic/off-2.png" width="100" height="38"></button>
+                                    </form>
+                                </td>
+                            {% endif %} 
+                            </tr>
+                        </table>
+                   
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="content-section" >
+                    
+                        <table>
+                            <tr>{% if switch[2] == 1 %}
+                                <td><p><img  src="/static/web_pic/fan-11.gif" width="100" height="100"><br><p style="background-color: rgb(71, 155, 71); color: white;">Fan</p></p></td>
+                                <td style="width:80px"> </td>
+                                <td><form action="{{ url_for('control') }}" method="get">
+                                    <button name="id" type="submit" value="20"><img  src="/static/web_pic/on-1.png" width="100" height="38"></button>
+                                    </form>
+                                </td>
+                            {% else %}
+                                <td><p><img  src="/static/web_pic/fan-1-s.gif" width="100" height="100"><br><p style="background-color: rgb(70, 70, 70); color: white;">Fan</p></p></td>
+                                <td style="width:80px"> </td>
+                                <td><form action="{{ url_for('control') }}" method="get">
+                                    <button name="id" type="submit" value="21"><img  src="/static/web_pic/off-2.png" width="100" height="38"></button>
+                                    </form>
+                                </td>
+                            {% endif %} 
+                            </tr>
+                        </table>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock control_center %}
