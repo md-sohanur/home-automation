@@ -15,32 +15,31 @@ def control_center():
 @app.route("/control")
 def control():
     if request.args.get('room_id') == '1':
-        current_user.switch_status = '111'
+        current_user.switch_status = '1111'
     elif request.args.get('room_id') == '0':
-        current_user.switch_status = '000'
+        current_user.switch_status = '0001'
     else:
         switch_value = request.args.get('id')
         switch = list(current_user.switch_status)
         switch[int(switch_value[0])] = switch_value[1]
-        switch[4] = '1'
+        switch[3] = '1'
         current_user.switch_status = ''.join(switch)
     db.session.commit()
 
-    return redirect(url_for('control_center'))
+    return redirect(url_for("control_center"))
 
 @app.route("/control_switch")
 def control_switch():
  
     user = User.query.filter_by(username=request.args.get('un')).first()
-    switch = list(user.switch_status)
-    
-    if switch[4]==1:
-        switch[4]=0
+    switch = list(user.switch_status)  
+    if switch[3]=='1':
+        switch[3]='0'
         user.switch_status = ''.join(switch)
         db.session.commit()
         return user.switch_status
     else:
-        return ''
+        return  'No change commit'
 
 @app.route("/add_user", methods=['GET', 'POST'])
 def add_user():
