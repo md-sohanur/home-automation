@@ -11,23 +11,7 @@
         </form> 
         <table class="table">
                     
-                <th>
-                                                            
-                                {% if user.switch_status[1] == '1' %}                                              
-                                    <form action="{{ url_for('control') }}" method="get">                                       
-                                            <button name="id" type="submit" value="10"><div class="content-section" ><p><img  src="/static/web_pic/d_bulb_1.jpg" width="80" height="80"><br><p style="background-color: rgb(71, 155, 71); color: white;">Dream Light</p></div></button>
-                                            
-                                    </form>                                
-                                {% else %}
-                                    <form action="{{ url_for('control') }}" method="get">
-                                        <button name="id" type="submit" value="11"><div class="content-section" ><p><img  src="/static/web_pic/d_bulb_0.jpg" width="80" height="80"><br><p style="background-color: rgb(70, 70, 70); color: white;">Dream Light</p></div></button>
-                                    </form>
-                                    
-                                {% endif %}                          
-                   
-                </th>
-                <th>
-                    
+                <th>                   
                             {% if user.switch_status[2] == '1' %}               
                                     <form action="{{ url_for('control') }}" method="get">
                                         <button name="id" type="submit" value="20"><div class="content-section" > <p><img  src="/static/web_pic/bulb2-12.jpg" width="80" height="80"><br><p style="background-color: rgb(71, 155, 71); color: white;">Dream Light</p></div></button>
@@ -38,23 +22,7 @@
                                         </form>                                
                                 {% endif %}                                              
                    
-                </th>
-                <th>
-                    
-                            
-                                {% if user.switch_status[3] == '1' %}
-                                                
-                                    <form action="{{ url_for('control') }}" method="get">
-                                        <button name="id" type="submit" value="30"><div class="content-section" > <p><img  src="/static/web_pic/fan-11.gif" width="80" height="80"><br><p style="background-color: rgb(71, 155, 71); color: white;">Dream Light</p></div></button>
-                                        </form>
-                                    
-                                {% else %}
-                                    <form action="{{ url_for('control') }}" method="get">
-                                        <button name="id" type="submit" value="31"><div class="content-section" > <p><img  src="/static/web_pic/fan-1-s.gif" width="80" height="80"><br><p style="background-color: rgb(70, 70, 70); color: white;">Dream Light</p></div></button>
-                                        </form>
-                                    
-                                {% endif %}                        
-                </th>      
+                </th>  
         </table> 
 </main>
 {% endblock control_center %}
