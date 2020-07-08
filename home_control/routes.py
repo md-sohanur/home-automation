@@ -29,14 +29,21 @@ def control():
     return redirect(url_for("control_center"))
 
 @app.route("/cs")
-def control_switch(): 
+def control_switch():
     user = User.query.filter_by(username=request.args.get('un')).first()
-    switch = list(user.switch_status)  
+    switch = list(user.switch_status)
+    if request.args.get('rb') == '1':
+        user.switch_status = '0000'
+        db.session.commit()
+        return ''
+    elif request.args.get('rb') == '0' :
+        return user.switch_status[1:4]
+
     if switch[0]=='1':
         switch[0]='0'
         user.switch_status = ''.join(switch)
         db.session.commit()
-        return user.switch_status
+        return user.switch_status[1:4]
     else:
         return  ''
 

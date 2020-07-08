@@ -1,108 +1,62 @@
 {% extends "layout.html" %}
 {% block control_center %}
-<style>      
-    th, td {
-    text-align: center;
-  }
-    button {
-        border-radius: 20px;
-        background-color: white;
-        border: none; 
-        cursor: pointer; 
-        float: middle; 
-</style>
-<div class="content-section">
-    <h1><form action="{{ url_for('control') }}" method="get">
-        {% if user.switch_status[1:4] == '000' %}        
-                <p>Room No-1: <button name="room_id" type="submit" value="1"><img  src="/static/web_pic/off-2.png" width="100" height="38"></button></p>         
-        {% else %}
-                <p>Room No-1: <button name="room_id" type="submit" value="0"><img  src="/static/web_pic/on-1.png" width="100" height="38"></button></p>         
-        {% endif %}
-    </form>
-    </h1> 
-   
     
-    <main role="main" class="container">
-        <div class="row">             
-            <div class="col-md-4">
-                <div class="content-section" >
+<main role="main">  
+    <div class="content-section">   
+        <form action="{{ url_for('control') }}" method="get">
+            {% if user.switch_status[1:4] == '000' %}        
+                    <p>Room No-1: <button name="room_id" type="submit" value="1"><img  src="/static/web_pic/off-2.png" width="80" height="30"></button></p>         
+            {% else %}
+                    <p>Room No-1: <button name="room_id" type="submit" value="0"><img  src="/static/web_pic/on-1.png" width="80" height="30"></button></p>         
+            {% endif %}
+        </form> 
+        <table class="table">
                     
-                        <table>
-                            <tr>{% if user.switch_status[1] == '1' %}
-                                <td><p><img  src="/static/web_pic/d_bulb_1.jpg" width="100" height="100"><br><p style="background-color: rgb(71, 155, 71); color: white;">Dream Light</p></p></td>
-                                <td style="width:80px"> </td>
-                                <td><form action="{{ url_for('control') }}" method="get">
-                                    <button name="id" type="submit" value="10"><img  src="/static/web_pic/on-1.png" width="100" height="38"></button>
-                                    </form>
-                                </td>
-                            {% else %}
-                                <td><p><img  src="/static/web_pic/d_bulb_0.jpg" width="100" height="100"><br><p style="background-color: rgb(70, 70, 70); color: white;">Dream Light</p></p></td>
-                                <td style="width:80px"> </td>
-                                <td><form action="{{ url_for('control') }}" method="get">
-                                    <button name="id" type="submit" value="11"><img  src="/static/web_pic/off-2.png" width="100" height="38"></button>
-                                    </form>
-                                </td>
-                            {% endif %} 
-                            </tr>
-                        </table>
-                    
-                </div>
-            </div>
-         
-            
-            <div class="col-md-4">
-                <div class="content-section" >
-                    
-                        <table>
-                            <tr>{% if user.switch_status[2] == '1' %}
-                                <td><p><img  src="/static/web_pic/bulb2-12.jpg" width="80" height="100"><p style="background-color: rgb(71, 155, 71); color: white;">Bulb</p></td>
-                                <td style="width:100px"> </td>
-                                <td><form action="{{ url_for('control') }}" method="get">
-                                    <button name="id" type="submit" value="20"><img  src="/static/web_pic/on-1.png" width="100" height="38"></button>
-                                    </form>
-                                </td>
-                            {% else %}
-                                <td><p><img  src="/static/web_pic/bulb2-s.jpg" width="80" height="100"><br><p style="background-color: rgb(70, 70, 70); color: white;">Bulb</p></p></td>
-                                <td style="width:100px"> </td>
-                                <td><form action="{{ url_for('control') }}" method="get">
-                                    <button name="id" type="submit" value="21"><img  src="/static/web_pic/off-2.png" width="100" height="38"></button>
-                                    </form>
-                                </td>
-                            {% endif %} 
-                            </tr>
-                        </table>
-                   
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="content-section" >
-                    
-                        <table>
-                            <tr>{% if user.switch_status[3] == '1' %}
-                                <td><p><img  src="/static/web_pic/fan-11.gif" width="100" height="100"><br><p style="background-color: rgb(71, 155, 71); color: white;">Fan</p></p></td>
-                                <td style="width:80px"> </td>
-                                <td><form action="{{ url_for('control') }}" method="get">
-                                    <button name="id" type="submit" value="30"><img  src="/static/web_pic/on-1.png" width="100" height="38"></button>
-                                    </form>
-                                </td>
-                            {% else %}
-                                <td><p><img  src="/static/web_pic/fan-1-s.gif" width="100" height="100"><br><p style="background-color: rgb(70, 70, 70); color: white;">Fan</p></p></td>
-                                <td style="width:80px"> </td>
-                                <td><form action="{{ url_for('control') }}" method="get">
-                                    <button name="id" type="submit" value="31"><img  src="/static/web_pic/off-2.png" width="100" height="38"></button>
+                <th>
+                                                            
+                                {% if user.switch_status[1] == '1' %}                                              
+                                    <form action="{{ url_for('control') }}" method="get">                                       
+                                            <button name="id" type="submit" value="10"><div class="content-section" ><p><img  src="/static/web_pic/d_bulb_1.jpg" width="80" height="80"><br><p style="background-color: rgb(71, 155, 71); color: white;">Dream Light</p></div></button>
+                                            
+                                    </form>                                
+                                {% else %}
+                                    <form action="{{ url_for('control') }}" method="get">
+                                        <button name="id" type="submit" value="11"><div class="content-section" ><p><img  src="/static/web_pic/d_bulb_0.jpg" width="80" height="80"><br><p style="background-color: rgb(70, 70, 70); color: white;">Dream Light</p></div></button>
                                     </form>
                                     
-                                </td>
-                            {% endif %} 
-                            </tr>
-                        </table>
-
-                        
+                                {% endif %}                          
+                   
+                </th>
+                <th>
                     
-                </div>
-            </div>
-        </div>
-    </main>
-</div>
+                            {% if user.switch_status[2] == '1' %}               
+                                    <form action="{{ url_for('control') }}" method="get">
+                                        <button name="id" type="submit" value="20"><div class="content-section" > <p><img  src="/static/web_pic/bulb2-12.jpg" width="80" height="80"><br><p style="background-color: rgb(71, 155, 71); color: white;">Dream Light</p></div></button>
+                                        </form>
+                                {% else %}
+                                    <form action="{{ url_for('control') }}" method="get">
+                                        <button name="id" type="submit" value="21"><div class="content-section" > <p><img  src="/static/web_pic/bulb2-s.jpg" width="80" height="80"><br><p style="background-color: rgb(70, 70, 70); color: white;">Dream Light</p></div></button>
+                                        </form>                                
+                                {% endif %}                                              
+                   
+                </th>
+                <th>
+                    
+                            
+                                {% if user.switch_status[3] == '1' %}
+                                                
+                                    <form action="{{ url_for('control') }}" method="get">
+                                        <button name="id" type="submit" value="30"><div class="content-section" > <p><img  src="/static/web_pic/fan-11.gif" width="80" height="80"><br><p style="background-color: rgb(71, 155, 71); color: white;">Dream Light</p></div></button>
+                                        </form>
+                                    
+                                {% else %}
+                                    <form action="{{ url_for('control') }}" method="get">
+                                        <button name="id" type="submit" value="31"><div class="content-section" > <p><img  src="/static/web_pic/fan-1-s.gif" width="80" height="80"><br><p style="background-color: rgb(70, 70, 70); color: white;">Dream Light</p></div></button>
+                                        </form>
+                                    
+                                {% endif %}                        
+                </th>      
+        </table> 
+    </div>
+</main>
 {% endblock control_center %}
