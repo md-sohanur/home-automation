@@ -17,11 +17,11 @@
                 <th>                   
                             {% if user.switch_status[2] == '1' %}               
                                     <form action="{{ url_for('control') }}" method="get">
-                                        <button name="id" type="submit" value="20"><div class="content-section" > <p><img  src="/static/web_pic/bulb2-12.jpg" width="80" height="80"><br><p style="background-color: rgb(71, 155, 71); color: white;">Dream Light</p></div></button>
+                                        <button name="id" type="submit" value="20"><div class="content-section" > <p><img  src="/static/web_pic/bulb2-12.jpg" width="60" height="80"><br><p style="background-color: rgb(71, 155, 71); color: white;">Dream Light</p></div></button>
                                         </form>
                                 {% else %}
                                     <form action="{{ url_for('control') }}" method="get">
-                                        <button name="id" type="submit" value="21"><div class="content-section" > <p><img  src="/static/web_pic/bulb2-s.jpg" width="80" height="80"><br><p style="background-color: rgb(70, 70, 70); color: white;">Dream Light</p></div></button>
+                                        <button name="id" type="submit" value="21"><div class="content-section" > <p><img  src="/static/web_pic/bulb2-s.jpg" width="60" height="80"><br><p style="background-color: rgb(70, 70, 70); color: white;">Dream Light</p></div></button>
                                         </form>                                
                                 {% endif %}                                              
                    
