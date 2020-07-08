@@ -6,8 +6,6 @@ from home_control.forms import RegistrationForm, LoginForm
 from home_control.models import  User
 from flask_login import login_user, current_user, logout_user, login_required
 
-flag = False
-
 @app.route("/")
 @app.route("/control_center")
 @login_required
@@ -24,21 +22,25 @@ def control():
         switch_value = request.args.get('id')
         switch = list(current_user.switch_status)
         switch[int(switch_value[0])] = switch_value[1]
+        switch[4] = '1'
         current_user.switch_status = ''.join(switch)
     db.session.commit()
-    global flag
-    flag = True
+
     return redirect(url_for('control_center'))
 
 @app.route("/control_switch")
 def control_switch():
-    global flag
+ 
     user = User.query.filter_by(username=request.args.get('un')).first()
-    if flag:
-        flag = False
+    switch = list(user.switch_status)
+    
+    if switch[4]==1:
+        switch[4]=0
+        user.switch_status = ''.join(switch)
+        db.session.commit()
         return user.switch_status
     else:
-        return''
+        return ''
 
 @app.route("/add_user", methods=['GET', 'POST'])
 def add_user():
