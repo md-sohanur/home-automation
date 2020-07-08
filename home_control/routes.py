@@ -28,7 +28,7 @@ def control():
 
     return redirect(url_for("control_center"))
 
-@app.route("/control_switch")
+@app.route("/cs")
 def control_switch():
  
     user = User.query.filter_by(username=request.args.get('un')).first()
