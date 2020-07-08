@@ -92,8 +92,8 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </div>
     </nav>
-  
-    <main role="main" class="container">
+  </header>
+  <main role="main" class="container">
       <div class="row">
         <div class="col-md-12">
           {% with messages = get_flashed_messages(with_categories=true) %}
@@ -108,8 +108,7 @@ h1, h2, h3, h4, h5, h6 {
           {% block content %}{% endblock %}
         </div>
       {% if current_user.is_authenticated %}
-      <div class="col-md-12">
-        <div class="content-section" class="center">
+        <div class="content-section">
           {% block control_center %} {% endblock %}
         </div>
       </div> 
