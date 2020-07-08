@@ -2,14 +2,17 @@
 {% block control_center %}
     
 <main>
-        <form action="{{ url_for('control') }}" method="get">
-            {% if user.switch_status[1:4] == '000' %}        
-                    <p>Room No-1: <button name="room_id" type="submit" value="1"><img  src="/static/web_pic/off-2.png" width="80" height="30"></button></p>         
-            {% else %}
-                    <p>Room No-1: <button name="room_id" type="submit" value="0"><img  src="/static/web_pic/on-1.png" width="80" height="30"></button></p>         
-            {% endif %}
-        </form> 
+    <caption style="text-align: center; ">
+    <form action="{{ url_for('control') }}" method="get">
+        {% if user.switch_status[1:4] == '000' %}        
+                <p>Room No-1: <button name="room_id" type="submit" value="1"><img  src="/static/web_pic/off-2.png" width="80" height="30"></button></p>         
+        {% else %}
+                <p>Room No-1: <button name="room_id" type="submit" value="0"><img  src="/static/web_pic/on-1.png" width="80" height="30"></button></p>         
+        {% endif %}
+    </form> 
+    </caption>
         <table class="table">
+            <caption>
                     
                 <th>                   
                             {% if user.switch_status[2] == '1' %}               

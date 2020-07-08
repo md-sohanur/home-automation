@@ -108,10 +108,13 @@ h1, h2, h3, h4, h5, h6 {
           {% block content %}{% endblock %}
         </div>
       {% if current_user.is_authenticated %}
-        <div class="content-section">
+      
+      <table class="table">
+        
           {% block control_center %} {% endblock %}
-        </div>
-      </div> 
+       
+        </table>
+       
       {% endif %}
         
       </div>
