@@ -39,7 +39,7 @@ def control_switch():
         db.session.commit()
         return user.switch_status
     else:
-        return  'No change commit'
+        return  user.switch_status + 'No change commit'
 
 @app.route("/add_user", methods=['GET', 'POST'])
 def add_user():
