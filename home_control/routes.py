@@ -6,36 +6,31 @@ from home_control.forms import RegistrationForm, LoginForm
 from home_control.models import  User
 from flask_login import login_user, current_user, logout_user, login_required
 
-switch = (0,0,0)
 flag = False
 
 @app.route("/")
 @app.route("/control_center")
 @login_required
-def control_center():
-    global switch
-    img_file = url_for('static', filename = 'profile_pics/' + current_user.image_file)
-    return render_template('control_center.html', title='Control Center', user=current_user, image_file=img_file,switch = switch)    
+def control_center():   
+    return render_template('control_center.html', title='Control Center', user=current_user,switch = current_user.switch_status)    
 
 @app.route("/control")
 def control():
-    global switch
-    switch_value = request.args.get('id') 
-    temp = list(switch)
-    temp[int(switch_value[0])] = int(switch_value[1])
-    switch = tuple(temp)
+    switch_value = request.args.get('id')
+    switch = list(current_user.switch_status)
+    switch[int(switch_value[0])] = switch_value[1]
+    current_user.switch_status = ''.join(switch)
+    db.session.commit()
     return redirect(url_for('control_center'))
-
 @app.route("/check_sw")
 def check_sw():
     global switch
     return  str(switch)
 
-
 @app.route("/add_user", methods=['GET', 'POST'])
-@login_required
+
 def add_user():
-    if current_user.username == 'admin':
+    if 1==1:
         form = RegistrationForm()
         if form.validate_on_submit():
             if form.picture.data:
