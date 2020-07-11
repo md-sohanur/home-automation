@@ -154,7 +154,7 @@ body {
           type : 'POST',
           data : { username : username }
       });
-      $('#infoChange').fadeOut(1);  
+      $('#infoChange').fadeOut(500);  
       req.done(function(data){     
           $('#infoChange').fadeIn(100); 
           $('#updateStatus').text(data.status);      
