@@ -107,10 +107,11 @@ body {
             <img id="arrowRotate" src="/static/web_pic/bulb-off.jpg" data-swap="/static/web_pic/bulb-on.jpg" data-src="/static/web_pic/bulb-on.jpg" width="40" height="40"/>
           </div>
           </td>
-      <td><div class="content-section">
+      <td width="100">
+          <div class="content-section">
         <div id="infoChange">    
-          <div class="on_off">        
-            <button class="btn" username = "{{ user.username }}" > <input type="checkbox" id="on_off" /></button> 
+          <div class="on_off" username = "{{ user.username }}">        
+             <input type="checkbox" id="on_off" />
           </div>   
         </div>   
       </div>
@@ -124,13 +125,14 @@ body {
       </div>
       </td>
 
-    <td><div class="content-section">
+    <td width="100">
+    <div class="content-section">
       <div id="infoChange">   
-        <div class="on_off">        
-          <button class="btn" username = "{{ user.username }}" > <input type="checkbox" checked="checked" id="on_off_on"/></button> 
+        <div class="on_off" username = "{{ user.username }}">        
+          <input type="checkbox" checked="checked" id="on_off_on" />
         </div>   
       </div> 
-      </div>
+    </div>
     </td>
     {% endif %}   
   </th>  
@@ -142,7 +144,7 @@ body {
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script>
   $(document).ready(function(){
-  $('.btn').on('click',function(){     
+  $('.on_off').on('click',function(){     
     
     var swapImage = $('#arrowRotate').attr('data-swap'),
     currentImage = $('#arrowRotate').attr('src');
@@ -154,9 +156,27 @@ body {
           type : 'POST',
           data : { username : username }
       });
-      $('#infoChange').fadeOut(500);  
+      
+      $('#infoChange').fadeTo("fast", 0.3);
+
+      if (document.getElementById("on_off_on") == null){
+        document.getElementById("on_off").disabled = true;
+      }
+      else {
+      document.getElementById("on_off_on").disabled = true;
+        }
+      
+       
       req.done(function(data){     
-          $('#infoChange').fadeIn(100); 
+         // $('#infoChange').fadeIn(100); 
+         if (document.getElementById("on_off_on") == null){
+        document.getElementById("on_off").disabled = false;
+      }
+      else {
+      document.getElementById("on_off_on").disabled = false;
+        }
+         $('#infoChange').fadeTo("fast", 1);
+         
           $('#updateStatus').text(data.status);      
           $('#arrowRotate').attr({
           'src': swapImage,
@@ -177,6 +197,9 @@ function swapImage(){
       'data-swap': currentImage
   });
 };
+
+//var h = document.getElementById("on_of_on");
+
 
   </script>
 
