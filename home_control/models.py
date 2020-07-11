@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(20), unique=False, nullable=False)
     username = db.Column(db.String(25), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-    switch_status = db.Column(db.String(10),nullable=False, default='000')
+    switch_status = db.Column(db.String(10),nullable=False, default='off')
     password = db.Column(db.String(60), nullable=False) 
 
     def __repr__(self):

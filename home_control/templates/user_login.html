@@ -1,51 +1,131 @@
-{% extends "layout.html" %}
-{% block content %}
-<main role="main" class="container">
-    <div class="row">
-        <div class="col-md-4"></div>
-            <div class="content-section"> 
-                <div class="col-md-12">
-                    <form method="POST" action="">
-                        {{ form.hidden_tag() }}
-                        <fieldset class="form-group">
-                            <legend class="border-bottom mb-8">Log In</legend>
-                            <div class="form-group">
-                                {{ form.username.label(class="form-control-label") }}
-                                {% if form.username.errors %}
-                                    {{ form.username(class="form-control form-control-lg is-invalid") }}
-                                    <div class="invalid-feedback">
-                                        {% for error in form.username.errors %}
-                                            <span>{{ error }}</span>
-                                        {% endfor %}
-                                    </div>
-                                {% else %}
-                                    {{ form.username(class="form-control form-control-lg") }}
-                                {% endif %}
-                            </div>
-                            <div class="form-group">
-                                {{ form.password.label(class="form-control-label") }}
-                                {% if form.password.errors %}
-                                    {{ form.password(class="form-control form-control-lg is-invalid") }}
-                                    <div class="invalid-feedback">
-                                        {% for error in form.password.errors %}
-                                            <span>{{ error }}</span>
-                                        {% endfor %}
-                                    </div>
-                                {% else %}
-                                    {{ form.password(class="form-control form-control-lg") }}
-                                {% endif %}
-                            </div>
-                            <div class="form-check">
-                                {{ form.remember(class="form-check-input") }}
-                                {{ form.remember.label(class="form-check-label") }}
-                            </div>
-                        </fieldset>
-                        <div class="form-group">
-                            {{ form.submit(class="btn btn-outline-info") }}
-                        </div>
-                    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="static/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="static/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/css/q3.css">
+	<link rel="stylesheet" type="text/css" href="static/css/w3.css">
+<!--===============================================================================================-->
+<style>
+  @font-face {
+  font-family: Poppins-Regular;
+  src: url('static/fonts/poppins/Poppins-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('static/fonts/poppins/Poppins-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('static/fonts/poppins/Poppins-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url('static/fonts/poppins/Poppins-SemiBold.ttf'); 
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+</style>
+</head>
+
+<body>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" method="POST" action="">
+                {{ form.hidden_tag() }}
+                <span class="login100-form-title p-b-26">
+                    Welcome
+                </span>
+                <span class="login100-form-title p-b-22">
+                    <i class="zmdi zmdi-font"> Smart Home</i>
+                </span>
+
+                <div class="wrap-input100 validate-input">   
+                    
+                    <input class="input100" id="username" name="username" required="" type="text" value="">   
+                    <span class="focus-input100" data-placeholder="Username"></span>   
+                        
+                   
                 </div>
-            </div>
-        
+
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <span class="btn-show-pass">
+                        <i class="zmdi zmdi-eye">
+                        </i>
+                    </span>
+                    <input class="input100" id="password" name="password" required="" type="password" value="">  
+                    <span class="focus-input100" data-placeholder="Password"></span>
+                </div>
+                
+
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button class="login100-form-btn" id="submit" name="submit" type="submit">
+                          login
+                        </button>                     
+                    </div>
+                </div>
+
+               
+                <div class="text-center p-t-115">
+                    <span class="txt1">
+                        Don’t have an account?
+                    </span>
+
+                    <a class="txt2" href="#">
+                        Sign Up
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
-{% endblock content %}
+</div>
+	
+<!--===============================================================================================-->
+<script src="static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/bootstrap/js/popper.js"></script>
+	<script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/daterangepicker/moment.min.js"></script>
+	<script src="static/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="static/js/main.js"></script>
+</body>
+</html>

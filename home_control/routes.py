@@ -1,6 +1,6 @@
 import os
 import secrets
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, jsonify
 from home_control import app,  db, bcrypt
 from home_control.forms import RegistrationForm, LoginForm
 from home_control.models import  User
@@ -10,42 +10,31 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/control_center")
 @login_required
 def control_center():   
+    db.session.commit()
     return render_template('control_center.html', title='Control Center', user=current_user,switch = current_user.switch_status)    
 
-@app.route("/control")
-def control():
-    if request.args.get('room_id') == '1':
-        current_user.switch_status = '1111'
-    elif request.args.get('room_id') == '0':
-        current_user.switch_status = '1000'
-    else:
-        switch_value = request.args.get('id')
-        switch = list(current_user.switch_status)
-        switch[int(switch_value[0])] = switch_value[1]
-        switch[0] = '1'
-        current_user.switch_status = ''.join(switch)
+@app.route("/update", methods=['POST'])
+def update():
+    user = User.query.filter_by(username=request.form['username']).first()
+    if user.switch_status == 'on':
+        user.switch_status='off'
+    else :
+        user.switch_status='on'
     db.session.commit()
 
-    return redirect(url_for("control_center"))
+    return jsonify({'status' : user.switch_status})
 
 @app.route("/cs")
 def control_switch():
     user = User.query.filter_by(username=request.args.get('un')).first()
-    switch = list(user.switch_status)
     if request.args.get('rb') == '1':
         user.switch_status = '0000'
         db.session.commit()
         return ''
     elif request.args.get('rb') == '0' :
-        return user.switch_status[1:4]
-
-    if switch[0]=='1':
-        switch[0]='0'
-        user.switch_status = ''.join(switch)
-        db.session.commit()
-        return user.switch_status[1:4]
+        return user.switch_status
     else:
-        return  ''
+        return  user.switch_status
 
 @app.route("/add_user", methods=['GET', 'POST'])
 def add_user():
