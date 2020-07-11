@@ -143,21 +143,28 @@ body {
 </div>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script>
-  $(document).ready(function(){
-  $('.on_off').on('click',function(){     
-    
+
+$(document).ready(function(){
+  $('.on_off').on('change',function(){     
+    username = $(this).attr('username')
+    //document.getElementById("on_off").disabled = true;
+    updateData(username);    
+  });
+});
+
+
+function updateData(username){
     var swapImage = $('#arrowRotate').attr('data-swap'),
     currentImage = $('#arrowRotate').attr('src');
     
 
-      var username = $(this).attr('username')
+      //var username = $(this).attr('username')
       req = $.ajax({
           url : '/update',
           type : 'POST',
           data : { username : username }
       });
-      
-      $('#infoChange').fadeTo("fast", 0.3);
+      //$('#infoChange').fadeTo("fast", 0.3);
 
       if (document.getElementById("on_off_on") == null){
         document.getElementById("on_off").disabled = true;
@@ -175,28 +182,15 @@ body {
       else {
       document.getElementById("on_off_on").disabled = false;
         }
-         $('#infoChange').fadeTo("fast", 1);
+         //$('#infoChange').fadeTo("fast", 1);
          
           $('#updateStatus').text(data.status);      
           $('#arrowRotate').attr({
           'src': swapImage,
           'data-swap': currentImage
          });               
-      });        
-  
-  });
-});
-
-
-function swapImage(){
-  var swapImage = $('#arrowRotate').attr('data-swap'),
-      currentImage = $('#arrowRotate').attr('src');
-
-  $('#arrowRotate').attr({
-      'src': swapImage,
-      'data-swap': currentImage
-  });
-};
+      }); 
+}
 
 //var h = document.getElementById("on_of_on");
 
