@@ -54,7 +54,7 @@ td {
       </div>
       </td>
 
-    <td >
+    <td style="border-right: none;">
     <div class="content-section">  
         <div class="onoffswitch" id="switch_fading">
           <input type="checkbox" name="onoffswitch" user_name="{{ user.username }}" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" checked>
@@ -97,7 +97,7 @@ $('.onoffswitch-checkbox').on('click',function(){
         if (data.sts =! "ok"){
           httpReq(username)
         }
-        
+
         document.getElementById("myonoffswitch").disabled = false;
          $('#switch_fading').fadeTo("fast", 1);       
           //$('#updateStatus').text(data.status);  
