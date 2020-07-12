@@ -22,7 +22,9 @@ def update():
         user.switch_status='on'
     db.session.commit()
 
-    return jsonify({'status' : user.switch_status})
+    username=request.form['username']
+
+    return jsonify({'sts' : 'ok'})
 
 @app.route("/cs")
 def control_switch():
