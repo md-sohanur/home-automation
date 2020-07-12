@@ -97,6 +97,7 @@ $('.onoffswitch-checkbox').on('click',function(){
         if (data.sts =! "ok"){
           httpReq(username)
         }
+        
         document.getElementById("myonoffswitch").disabled = false;
          $('#switch_fading').fadeTo("fast", 1);       
           //$('#updateStatus').text(data.status);  
