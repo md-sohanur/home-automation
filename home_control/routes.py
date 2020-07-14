@@ -18,7 +18,7 @@ def control_center():
 def update():
     user = User.query.filter_by(username=request.form['username']).first()    
     if user.update_commit == 'no':
-        return jsonify({'update_commit' : 'wait'})
+        return jsonify({'update_commit' : 'done'})
     
     elif user.switch_status[int(request.form['switch_id'])] == request.form['switch_status']:
         return jsonify({'update_commit' : 'already_done','switch_status' : user.switch_status[0]})

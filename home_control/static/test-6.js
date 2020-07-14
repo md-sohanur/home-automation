@@ -157,9 +157,7 @@ if($('#switch_fading').attr('commit_status')=='no'){
               }
               clearInterval(refreshIntervalId);
             }
-            else{
-              //$('#updateStatus5').text('waiting to commit');
-          }       
+       
           });
         } 
            
