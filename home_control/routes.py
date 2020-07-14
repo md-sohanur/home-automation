@@ -10,34 +10,49 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/control_center")
 @login_required
 def control_center():   
-    db.session.commit()
+    #current_user.switch_status = '000000000000'
+    #db.session.commit()
     return render_template('control_center.html', title='Control Center', user=current_user,switch = current_user.switch_status)    
 
 @app.route("/update", methods=['POST'])
 def update():
-    user = User.query.filter_by(username=request.form['username']).first()
-    if user.switch_status == 'on':
-        user.switch_status='off'
-    else :
-        user.switch_status='on'
-    db.session.commit()
+    user = User.query.filter_by(username=request.form['username']).first()    
+    if user.switch_status[int(request.form['switch_id'])] == request.form['switch_status']:
+        return jsonify({'update_commit' : 'already_done'})
 
-    username=request.form['username']
+    elif user.update_commit == 'no':
+        return jsonify({'update_commit' : 'wait'})
+    
+    elif user.update_commit == 'yes' and request.form['req_state']=='recheck':
+        return jsonify({'update_commit' : 'complete'})
 
-    return jsonify({'sts' : 'ok'})
+    else:
+        sw_temp = list(user.switch_status) 
+        sw_temp[int(request.form['switch_id'])] = request.form['switch_status']
+        user.switch_status = ''.join(sw_temp)
+        user.update_commit = 'no' 
+        db.session.commit()
+
+        return jsonify({'update_commit' : 'done', 'switch_sts' : user.switch_status})
 
 @app.route("/cs")
 def control_switch():
     user = User.query.filter_by(username=request.args.get('un')).first()
     if request.args.get('rb') == '1':
-        user.switch_status = '0000'
-        db.session.commit()
-        return ''
+            user.switch_status = '000000000000'
+            db.session.commit()
+            return ''
     elif request.args.get('rb') == '0' :
-        return user.switch_status
-    else:
-        return  user.switch_status
+            return user.switch_status
 
+    if user.update_commit == 'no':
+        user.update_commit = 'yes'
+        db.session.commit()
+        return  user.switch_status
+    else :
+        return ''
+    
+    
 @app.route("/add_user", methods=['GET', 'POST'])
 def add_user():
     if 1==1:

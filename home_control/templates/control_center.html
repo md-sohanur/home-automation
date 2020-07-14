@@ -24,11 +24,16 @@ td {
 
 <div class="center">
   <h1>Smart Room Control:</h1>
+  <h2>1. <span id="updateStatus"></span></h2>
+  <h2>2. <span id="updateStatus2"></span></h2>
+  <h2>3. <span id="updateStatus3"></span></h2>
+  <h2>4. <span id="updateStatus4"></span></h2>
+  <h2>5. <span id="updateStatus5"></span></h2>
   <div>
   <table class="content-section-table">
     <tr>
     <th>
-    {% if user.switch_status == 'off' %}     
+    {% if user.switch_status[0] == '0' %}     
     <td><div class="content-section"><h2 style="background-color: white; color: black; width: 100%;">Bulb</h2></div></td>
         <td><div class="content-section">
             <img id="arrowRotate" src="/static/web_pic/bulb-off.jpg" data-swap="/static/web_pic/bulb-on.jpg" data-src="/static/web_pic/bulb-on.jpg" width="40" height="40"/>
@@ -36,8 +41,8 @@ td {
           </td>
       <td style="border-right: none">
           <div class="content-section"> 
-          <div class="onoffswitch" id="switch_fading">
-            <input type="checkbox" name="onoffswitch" user_name="{{ user.username }}" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0">
+          <div class="onoffswitch" id="switch_fading" commit_status="{{ user.update_commit }}">
+            <input type="checkbox" name="onoffswitch" user_name="{{ user.username }}" switch_id="0" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0">
             <label class="onoffswitch-label" for="myonoffswitch">
                 <span class="onoffswitch-inner"></span>
                 <span class="onoffswitch-switch"></span>
@@ -56,8 +61,8 @@ td {
 
     <td style="border-right: none;">
     <div class="content-section">  
-        <div class="onoffswitch" id="switch_fading">
-          <input type="checkbox" name="onoffswitch" user_name="{{ user.username }}" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" checked>
+        <div class="onoffswitch" id="switch_fading" commit_status="{{ user.update_commit }}">
+          <input type="checkbox" name="onoffswitch" user_name="{{ user.username }}" switch_id="0" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" checked>
           <label class="onoffswitch-label" for="myonoffswitch">
               <span class="onoffswitch-inner"></span>
               <span class="onoffswitch-switch"></span>
@@ -73,44 +78,13 @@ td {
 
 </div>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="static/test-2.js"></script>
   <script>
 
-$('.onoffswitch-checkbox').on('click',function(){
-        var username = $(this).attr('user_name')
-        
-        httpReq(username)       
-       
-  });
+/////////////////////////////////////////
 
-  function httpReq(username){
+/////////////////////////////If not commit previous change///////////////////////////////////////
 
-    req = $.ajax({
-          url : '/update',
-          type : 'POST',
-          data : { username : username }
-      });
-     
-      document.getElementById("myonoffswitch").disabled = true;
-      $('#switch_fading').fadeTo("fast", 0.4);
-            
-      req.done(function(data){      
-        if (data.sts =! "ok"){
-          httpReq(username)
-        }
-
-        document.getElementById("myonoffswitch").disabled = false;
-         $('#switch_fading').fadeTo("fast", 1);       
-          //$('#updateStatus').text(data.status);  
-
-        var swapImage = $('#arrowRotate').attr('data-swap'),
-        currentImage = $('#arrowRotate').attr('src');
-        $('#arrowRotate').attr({
-          'src': swapImage,
-          'data-swap': currentImage
-         });         
-                    
-      });
-  }
 </script>
 
 </body>
