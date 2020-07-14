@@ -11,7 +11,7 @@ if(document.getElementById("switch_fading").getAttribute("commit_status")=='no')
            });
     var switch_id = $('#myonoffswitch').attr('switch_id')
     var username = $('#myonoffswitch').attr('user_name')
-    var refreshIntervalId = setInterval(httpReqIn, 500)
+    var refreshIntervalId = setInterval(httpReqIn, 1500)
   
     function httpReqIn(){
           req = $.ajax({
@@ -93,7 +93,7 @@ if(document.getElementById("switch_fading").getAttribute("commit_status")=='no')
           }      
           else if(req_status=='done'){
            // $('#updateStatus4').text('Requsest submitted . Please wait'); 
-            refreshIntervalId = setInterval(httpReqWait, 500)
+            refreshIntervalId = setInterval(httpReqWait, 1500)
           }               
         });
   
@@ -131,7 +131,7 @@ if(document.getElementById("switch_fading").getAttribute("commit_status")=='no')
           else if(req_status=='done'){
            // $('#updateStatus4').text('Requsest submitted . Please wait'); 
             clearInterval(refreshIntervalId_fail);
-            refreshIntervalId = setInterval(httpReqWait, 500)
+            refreshIntervalId = setInterval(httpReqWait, 1500)
           }               
         });
   }
