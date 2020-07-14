@@ -17,11 +17,11 @@ def control_center():
 @app.route("/update", methods=['POST'])
 def update():
     user = User.query.filter_by(username=request.form['username']).first()    
-    if user.switch_status[int(request.form['switch_id'])] == request.form['switch_status']:
-        return jsonify({'update_commit' : 'already_done','switch_status' : user.switch_status[0]})
-
-    elif user.update_commit == 'no':
+    if user.update_commit == 'no':
         return jsonify({'update_commit' : 'wait'})
+    
+    elif user.switch_status[int(request.form['switch_id'])] == request.form['switch_status']:
+        return jsonify({'update_commit' : 'already_done','switch_status' : user.switch_status[0]})
     
     elif user.update_commit == 'yes' and request.form['req_state']=='recheck':
         return jsonify({'update_commit' : 'complete','switch_status' : user.switch_status[0]})
