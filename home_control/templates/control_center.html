@@ -10,7 +10,6 @@ td {
 }
 </style>
 </head>
-
 <body>
   
     <div class="topnav">
@@ -22,51 +21,38 @@ td {
       {% endif %}  
     </div>
 
+
 <div class="center">
-  <h1>Smart Room Control:</h1>
+  <h1>Smart Room Control</h1>
+  <h2 id="updateStatus2">1. </h2>
+
   
   <div>
   <table class="content-section-table">
     <tr>
-    <th>
-    {% if user.switch_status[0] == '0' %}     
-    <td><div class="content-section"><h2 style="background-color: white; color: black; width: 100%;">Bulb</h2></div></td>
-        <td><div class="content-section">
-            <img id="arrowRotate" src="/static/web_pic/bulb-off.jpg" data-swap="/static/web_pic/bulb-on.jpg" data-src="/static/web_pic/bulb-on.jpg" width="40" height="40"/>
-          </div>
-          </td>
-      <td style="border-right: none">
-          <div class="content-section"> 
-          <div class="onoffswitch" id="switch_fading" commit_status="{{ user.update_commit }}">
-            <input type="checkbox" name="onoffswitch" user_name="{{ user.username }}" switch_id="0" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0">
-            <label class="onoffswitch-label" for="myonoffswitch">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch"></span>
-            </label>
-        </div>      
-      </div>
-    </td>
-    
-    {% else %}
+    <th>     
 
       <td><div class="content-section"><h2 style="background-color: white; color: black; width: 100%;">Bulb</h2></div></td>
       <td><div class="content-section">
-        <img id="arrowRotate" src="/static/web_pic/bulb-on.jpg" data-swap="/static/web_pic/bulb-off.jpg" data-src="/static/web_pic/bulb-off.jpg" width="40" height="40"/>
+        <img id="bulb_logo" src="" bulb_on="/static/web_pic/bulb-on.jpg" bulb_off="/static/web_pic/bulb-off.jpg" width="40" height="40"/>
       </div>
       </td>
 
     <td style="border-right: none;">
     <div class="content-section">  
         <div class="onoffswitch" id="switch_fading" commit_status="{{ user.update_commit }}">
-          <input type="checkbox" name="onoffswitch" user_name="{{ user.username }}" switch_id="0" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" checked>
-          <label class="onoffswitch-label" for="myonoffswitch">
+          {% if user.switch_status[0]=='1' %}
+          <input type="checkbox" name="onoffswitch" user_name="{{ user.username }}" switch_id="0" switch_status="1" class="onoffswitch-checkbox" id="switch_0" tabindex="0" checked>
+          {% else %}
+          <input type="checkbox" name="onoffswitch" user_name="{{ user.username }}" switch_id="0" class="onoffswitch-checkbox" id="switch_0" tabindex="0">
+          {% endif %}
+          <label class="onoffswitch-label" for="switch_0">
               <span class="onoffswitch-inner"></span>
               <span class="onoffswitch-switch"></span>
           </label>
       </div>  
     </div>
-    </td>
-    {% endif %}   
+    </td>  
   </th>  
   </tr>
 </table>
@@ -74,12 +60,14 @@ td {
 
 </div>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src="static/test-4.js"></script>
+  
+  <script src="static/test-5.js"></script>
   <script>
+    
 
 /////////////////////////////////////////
-
 /////////////////////////////If not commit previous change///////////////////////////////////////
+ 
 
 </script>
 

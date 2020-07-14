@@ -18,13 +18,13 @@ def control_center():
 def update():
     user = User.query.filter_by(username=request.form['username']).first()    
     if user.switch_status[int(request.form['switch_id'])] == request.form['switch_status']:
-        return jsonify({'update_commit' : 'already_done'})
+        return jsonify({'update_commit' : 'already_done','switch_status' : user.switch_status[0]})
 
     elif user.update_commit == 'no':
         return jsonify({'update_commit' : 'wait'})
     
     elif user.update_commit == 'yes' and request.form['req_state']=='recheck':
-        return jsonify({'update_commit' : 'complete'})
+        return jsonify({'update_commit' : 'complete','switch_status' : user.switch_status[0]})
 
     else:
         sw_temp = list(user.switch_status) 
@@ -33,7 +33,7 @@ def update():
         user.update_commit = 'no' 
         db.session.commit()
 
-        return jsonify({'update_commit' : 'done', 'switch_sts' : user.switch_status})
+        return jsonify({'update_commit' : 'done', 'switch_status' : user.switch_status[0]})
 
 @app.route("/cs")
 def control_switch():
